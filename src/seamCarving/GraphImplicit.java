@@ -33,5 +33,10 @@ class GraphImplicit implements Graph{
 		      
 	 }
 
-    
+	@Override
+	public Iterable<Edge> edges() {
+		return null;
+	}
+
+
 }

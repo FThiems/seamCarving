@@ -34,9 +34,44 @@ public class Test
 		visite = new boolean[n*n+2];
 		dfs(g, 3);
 	 }
-   
+
+	 public static void testWrite(){
+		 SeamCarving sc = new SeamCarving();
+//   		int[][] image = {{8,13,12,124,67},{4,255,123,167,200},{14,45,90,56,140}};
+		int[][] image = sc.readpgm("ex1.pgm");
+   		String filename = "test.pgm";
+   		sc.writepgm(image, filename);
+	 }
+
+	 public static void testInterest(){
+//   		SeamCarving sc = new SeamCarving();
+//   		int[][] image = {{3,11,24,39},{8,21,29,39},{200,60,25,0}};
+		 int[][] image = SeamCarving.readpgm("test.pgm");
+   		int[][] itr = SeamCarving.interest(image);
+   		for (int i = 0; i< itr.length; i++){
+   			for(int j = 0; j<itr[0].length; j++){
+				System.out.print(itr[i][j] +  " ");
+			}
+			System.out.println("");
+		}
+	 }
+
+	 public static void testConstruGraph(){
+   		int[][] image = SeamCarving.readpgm("ex1.pgm");
+   		int[][] itr = SeamCarving.interest(image);
+   		Graph g = SeamCarving.toGraph(itr);
+   		int[] truePath = SeamCarving.bellman_Ford(g,itr.length*itr[0].length + 1,itr.length*itr[0].length);
+   		for(int j = 0; j<truePath.length; j++){
+			System.out.println(truePath[j]);
+		}
+		g.writeFile("test2.dot");
+   }
+
    public static void main(String[] args)
 	 {
-		testGraph();
+//		testGraph();
+//		testWrite();
+//		testInterest();
+		testConstruGraph();
 	 }
 }
